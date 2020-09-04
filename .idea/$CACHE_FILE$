@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="$USER_HOME$/AndroidProjects/News" value="PREVIEW" />
+        <entry key="$USER_HOME$/AndroidProjects/ToDoMVP" value="PREVIEW" />
+        <entry key="$USER_HOME$/AndroidProjects/YaraTech-JavaTest" value="PREVIEW" />
+        <entry key="$USER_HOME$/AndroidStudioProjects/BazaarKotlin" value="PREVIEW" />
+        <entry key="$USER_HOME$/AndroidStudioProjects/FragNav" value="PREVIEW" />
+        <entry key="$USER_HOME$/AndroidStudioProjects/MovieHub" value="PREVIEW" />
+        <entry key="$USER_HOME$/AndroidStudioProjects/OfflineSampleApp" value="PREVIEW" />
+        <entry key="$USER_HOME$/AndroidStudioProjects/android-Camera2Basic" value="PREVIEW" />
+        <entry key="$USER_HOME$/AndroidStudioProjects/android-architecture" value="PREVIEW" />
+        <entry key="$USER_HOME$/AndroidStudioProjects/android-clean-arc-coroutines" value="PREVIEW" />
+        <entry key="$USER_HOME$/AndroidStudioProjects/code-scanner" value="PREVIEW" />
+        <entry key="$USER_HOME$/AndroidStudioProjects/coil" value="PREVIEW" />
+        <entry key="$USER_HOME$/AndroidStudioProjects/coil-me" value="PREVIEW" />
+        <entry key="$USER_HOME$/AndroidStudioProjects/kdeconnect-android" value="PREVIEW" />
+        <entry key="$USER_HOME$/AndroidStudioProjects/picasso-transformations" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+</project>
