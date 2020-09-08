@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import com.github.mohammadsianaki.doctorbooking.data.DataFactory
+import com.github.mohammadsianaki.doctorbooking.ui.components.SectionTitle
 
 
 @Composable
@@ -36,50 +37,36 @@ fun DashboardContent(
             horizontalGravity = Alignment.Start,
             verticalArrangement = Arrangement.Top
         ) {
-            ProvideEmphasis(emphasis = EmphasisAmbient.current.high) {
-                Text(
-                    modifier = Modifier.padding(16.dp),
-                    text = "Find Your \nConsultation", style = TextStyle(
-                        color = Color(0xDD000000).copy(alpha = 0.8f),
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 30.sp,
-                    )
-                )
-            }
-
-            SearchBox(Modifier.padding(16.dp))
-
-            ProvideEmphasis(emphasis = EmphasisAmbient.current.high) {
-                Text(
-                    modifier = Modifier.padding(16.dp),
-                    text = "Categories", style = TextStyle(
-                        color = Color(0xDD000000).copy(alpha = 0.8f),
-                        fontSize = 25.sp,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                )
-            }
-
-            DashboardCategoryTabs(categories = categories, "Adults")
-
-            SpecialityList(specialities = specialities)
-
-
-            ProvideEmphasis(emphasis = EmphasisAmbient.current.high) {
-                Text(
-                    modifier = Modifier.padding(16.dp),
-                    text = "Doctors", style = TextStyle(
-                        color = Color(0xDD000000).copy(alpha = 0.8f),
-                        fontSize = 25.sp,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                )
-            }
-
-            DoctorsList(doctors = doctors)
+            SearchSection()
+            CategorySection(categories, specialities)
+            DoctorsSection(doctors)
         }
     }
 }
+
+@Composable
+fun SearchSection() {
+    ProvideEmphasis(emphasis = EmphasisAmbient.current.high) {
+        Text(
+            modifier = Modifier.padding(16.dp),
+            text = "Find Your \nConsultation", style = TextStyle(
+                color = Color(0xDD000000).copy(alpha = 0.8f),
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 30.sp,
+            )
+        )
+    }
+    SearchBox(Modifier.padding(16.dp))
+}
+
+@Composable
+fun CategorySection(categories: List<String>, specialities: List<Speciality>) {
+    SectionTitle(text = "Categories")
+    DashboardCategoryTabs(categories = categories, "Adults")
+    SpecialityList(specialities = specialities)
+
+}
+
 
 @Composable
 fun DashboardCategoryTabs(categories: List<String>, selectedCategory: String) {
@@ -115,3 +102,10 @@ fun DashboardCategoryTabIndicator(
             .background(color, RoundedCornerShape(topLeftPercent = 100, topRightPercent = 100))
     )
 }
+
+@Composable
+fun DoctorsSection(doctors: List<DoctorModel>) {
+    SectionTitle(text = "Doctors")
+    DoctorsList(doctors = doctors)
+}
+
