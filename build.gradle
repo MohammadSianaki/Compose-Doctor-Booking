@@ -2,10 +2,11 @@
 buildscript {
     ext.kotlin_version = "1.4.0"
     ext.compose_version = "1.0.0-alpha02"
-    ext.lifecycle_version = "2.3.0-alpha07"
+    ext.lifecycle_version = "2.3.0-alpha06"
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.2.0-alpha08"
@@ -20,6 +21,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
 }
 

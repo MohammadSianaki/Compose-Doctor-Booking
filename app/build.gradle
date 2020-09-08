@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.github.mohammadsianaki.doctorbooking"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -61,25 +61,25 @@ dependencies {
     implementation "androidx.ui:ui-test:${compose_version}"
 
 
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+//    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+//    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+//    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+//    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
 
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+//    testImplementation 'junit:junit:4.+'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation "dev.chrisbanes.accompanist:accompanist-coil:0.2.1"
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
     kotlinOptions {
         // Treat all Kotlin warnings as errors
-        allWarningsAsErrors = true
+        allWarningsAsErrors = false
         freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
         // Enable experimental coroutines APIs, including Flow
         freeCompilerArgs += '-Xopt-in=kotlin.Experimental'
         freeCompilerArgs += '-Xallow-jvm-ir-dependencies'
-
         // Set JVM target to 1.8
         jvmTarget = "1.8"
     }
