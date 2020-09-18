@@ -20,14 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import com.github.mohammadsianaki.doctorbooking.data.DataFactory
+import com.github.mohammadsianaki.doctorbooking.model.DoctorModel
 
-
-data class DoctorModel(
-    val name: String,
-    val speciality: String,
-    @DrawableRes val profile: Int,
-    val telephone: String
-)
 
 @Composable
 fun DoctorsList(doctors: List<DoctorModel>) {

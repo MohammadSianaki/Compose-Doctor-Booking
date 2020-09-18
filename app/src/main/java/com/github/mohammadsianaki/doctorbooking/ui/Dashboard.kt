@@ -63,7 +63,7 @@ fun SearchSection() {
 fun CategorySection(categories: List<String>, specialities: List<Speciality>) {
     SectionTitle(text = "Categories")
     DashboardCategoryTabs(categories = categories, "Adults")
-    SpecialityList(specialities = specialities)
+    SpecialityList(specialityModels = specialities)
 
 }
 

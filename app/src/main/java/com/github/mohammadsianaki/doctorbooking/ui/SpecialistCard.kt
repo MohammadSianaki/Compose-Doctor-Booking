@@ -1,6 +1,5 @@
 package com.github.mohammadsianaki.doctorbooking.ui
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Box
 import androidx.compose.foundation.ContentGravity
 import androidx.compose.foundation.Image
@@ -22,30 +21,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import com.github.mohammadsianaki.doctorbooking.data.DataFactory
+import com.github.mohammadsianaki.doctorbooking.model.SpecialityModel
 
-
-data class Speciality(
-    @DrawableRes val image: Int,
-    val speciality: String,
-    val numberOfDoctors: Int,
-    val backgroundColor: Color,
-)
 
 @Composable
-fun SpecialityList(specialities: List<Speciality>) {
+fun SpecialityList(specialityModels: List<SpecialityModel>) {
     Box(Modifier.preferredHeight(250.dp)) {
-        LazyRowFor(items = specialities) { item ->
-            SpecialityCard(speciality = item)
+        LazyRowFor(items = specialityModels) { item ->
+            SpecialityCard(specialityModel = item)
         }
     }
 }
 
 
 @Composable
-fun SpecialityCard(speciality: Speciality) {
+fun SpecialityCard(specialityModel: SpecialityModel) {
     Card(
         shape = RoundedCornerShape(24.dp),
-        backgroundColor = speciality.backgroundColor,
+        backgroundColor = specialityModel.backgroundColor,
         modifier = Modifier.padding(16.dp).preferredWidth(150.dp),
         elevation = 4.dp
     ) {
@@ -55,12 +48,12 @@ fun SpecialityCard(speciality: Speciality) {
         ) {
             Text(
                 modifier = Modifier.padding(top = 16.dp),
-                text = speciality.speciality,
+                text = specialityModel.speciality,
                 style = TextStyle(color = Color.White, fontSize = 20.sp)
             )
             Text(
                 modifier = Modifier.padding(top = 8.dp),
-                text = "${speciality.numberOfDoctors} Doctors",
+                text = "${specialityModel.numberOfDoctors} Doctors",
                 style = TextStyle(
                     color = Color.White,
                     fontSize = 13.sp
@@ -68,7 +61,7 @@ fun SpecialityCard(speciality: Speciality) {
             )
             Image(
                 modifier = Modifier.preferredHeight(160.dp),
-                asset = imageResource(id = speciality.image),
+                asset = imageResource(id = specialityModel.image),
                 contentScale = ContentScale.Fit,
             )
         }
@@ -78,8 +71,8 @@ fun SpecialityCard(speciality: Speciality) {
 
 @Composable
 @Preview
-fun SpecialityCardPreview(speciality: Speciality = DataFactory.getSpeciality()[0]) {
+fun SpecialityCardPreview(specialityModel: SpecialityModel = DataFactory.getSpeciality()[0]) {
     MaterialTheme {
-        SpecialityCard(speciality = speciality)
+        SpecialityCard(specialityModel = specialityModel)
     }
 }
