@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
@@ -30,6 +31,7 @@ fun DoctorInfo(doctorModel: DoctorModel = DataFactory.getDoctors()[0]) {
         ScrollableColumn {
             ProfileSection(doctorModel)
             AboutSection()
+            ActivitySection()
         }
     }
 }
@@ -106,10 +108,10 @@ fun AboutSection() {
     Text(
         text = "Dr. Stefeni Albert is a cardiologist in Nashville & affiliated with multiple hospitals in the  area.He received his medical degree from Duke University School of Medicine and has been in practice for more than 20 years. ",
         style = TextStyle(color = Color(0xFF9E9E9E), fontSize = 16.sp),
-        modifier = Modifier.padding(horizontal = 32.dp,vertical = 16.dp),
+        modifier = Modifier.padding(horizontal = 32.dp, vertical = 16.dp),
     )
-    Row(Modifier.padding(horizontal = 32.dp, vertical = 16.dp).background(Color.Red)) {
-        Column(Modifier.fillMaxHeight().weight(1f).background(Color.Cyan)) {
+    Row(Modifier.padding(horizontal = 32.dp, vertical = 16.dp)) {
+        Column(Modifier.fillMaxHeight().weight(1f)) {
             Row {
                 Image(
                     asset = imageResource(id = Drawables.mappin),
@@ -154,6 +156,60 @@ fun AboutSection() {
     }
 }
 
+@Composable
+fun ActivitySection() {
+    Text(
+        text = "Activity", style = TextStyle(
+            color = Color(0xff242424),
+            fontSize = 28.sp,
+            fontWeight = FontWeight.SemiBold
+        ),
+        modifier = Modifier.padding(horizontal = 32.dp)
+    )
+    Row(horizontalArrangement = Arrangement.SpaceEvenly) {
+        ActivityCard(
+            text = "List of Schedule",
+            backgroundColor = Color(0xffFCCA9B),
+            imageBackgroundColor = Color(0xffFBB97C)
+        )
+
+        ActivityCard(
+            text = "Doctor's Daily Post",
+            backgroundColor = Color(0xffA5A5A5),
+            imageBackgroundColor = Color(0xffBBBBBB)
+        )
+    }
+}
+
+@Composable
+fun ActivityCard(text: String, backgroundColor: Color, imageBackgroundColor: Color) {
+    Box(
+        backgroundColor = backgroundColor,
+        shape = RoundedCornerShape(20.dp),
+        modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp).preferredHeight(100.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxHeight(),
+            horizontalArrangement = Arrangement.Center,
+            verticalGravity = ContentGravity.CenterVertically
+        ) {
+            Image(
+                asset = imageResource(id = Drawables.list), modifier = Modifier
+                    .padding(end = 8.dp, start = 16.dp, top = 16.dp, bottom = 16.dp).background(
+                        color = imageBackgroundColor,
+                        shape = RoundedCornerShape(16.dp)
+                    ).padding(8.dp)
+            )
+            Text(
+                text = text, style = TextStyle(
+                    color = Color.White,
+                    fontSize = 17.sp
+                ),
+                modifier = Modifier.padding(end = 16.dp, start = 8.dp, top = 16.dp, bottom = 16.dp)
+            )
+        }
+    }
+}
 
 @Composable
 @Preview
