@@ -26,7 +26,7 @@ import com.github.mohammadsianaki.doctorbooking.util.Drawables
 @Composable
 fun DoctorInfo(doctorModel: DoctorModel = DataFactory.getDoctors()[0]) {
     Scaffold(
-        topBar = { AppBar() },
+        topBar = { AppBar(true) },
     ) {
         ScrollableColumn {
             ProfileSection(doctorModel)
@@ -68,6 +68,7 @@ fun ProfileSection(doctorModel: DoctorModel) {
             ) {
                 IconButton(
                     onClick = {},
+                    enabled = false,
                     modifier = Modifier.background(
                         color = Color(0xffFFECDD),
                         shape = RoundedCornerShape(10.dp)
@@ -77,6 +78,7 @@ fun ProfileSection(doctorModel: DoctorModel) {
                 }
                 IconButton(
                     onClick = {},
+                    enabled = false,
                     modifier = Modifier.background(
                         color = Color(0xffFEF2F0),
                         shape = RoundedCornerShape(10.dp)
@@ -86,6 +88,7 @@ fun ProfileSection(doctorModel: DoctorModel) {
                 }
                 IconButton(
                     onClick = {},
+                    enabled = false,
                     modifier = Modifier.background(
                         color = Color(0xffEBECEF),
                         shape = RoundedCornerShape(10.dp)
@@ -130,7 +133,7 @@ fun AboutSection() {
                     )
                 }
             }
-            Row {
+            Row(modifier = Modifier.padding(top = 16.dp)) {
                 Image(
                     asset = imageResource(id = Drawables.clock),
                     Modifier.gravity(Alignment.CenterVertically)
@@ -170,23 +173,32 @@ fun ActivitySection() {
         ActivityCard(
             text = "List of Schedule",
             backgroundColor = Color(0xffFCCA9B),
-            imageBackgroundColor = Color(0xffFBB97C)
+            imageBackgroundColor = Color(0xffFBB97C),
+            modifier = Modifier.padding(start = 16.dp, end = 8.dp, top = 24.dp, bottom = 24.dp)
+                .preferredHeight(100.dp)
         )
 
         ActivityCard(
             text = "Doctor's Daily Post",
             backgroundColor = Color(0xffA5A5A5),
-            imageBackgroundColor = Color(0xffBBBBBB)
+            imageBackgroundColor = Color(0xffBBBBBB),
+            modifier = Modifier.padding(start = 8.dp, end = 16.dp, top = 24.dp, bottom = 24.dp)
+                .preferredHeight(100.dp)
         )
     }
 }
 
 @Composable
-fun ActivityCard(text: String, backgroundColor: Color, imageBackgroundColor: Color) {
+fun ActivityCard(
+    text: String,
+    backgroundColor: Color,
+    imageBackgroundColor: Color,
+    modifier: Modifier = Modifier
+) {
     Box(
         backgroundColor = backgroundColor,
         shape = RoundedCornerShape(20.dp),
-        modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp).preferredHeight(100.dp)
+        modifier = modifier
     ) {
         Row(
             modifier = Modifier.fillMaxHeight(),
