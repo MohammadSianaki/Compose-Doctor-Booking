@@ -18,14 +18,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import com.github.mohammadsianaki.doctorbooking.data.DataFactory
-import com.github.mohammadsianaki.doctorbooking.ui.components.SectionTitle
+import com.github.mohammadsianaki.doctorbooking.model.DoctorModel
+import com.github.mohammadsianaki.doctorbooking.model.SpecialityModel
+import com.github.mohammadsianaki.doctorbooking.ui.components.EmphasizedText
 
 
 @Composable
 @Preview
 fun DashboardContent(
     categories: List<String> = listOf("Adults", "Childrens", "Womens", "Mens"),
-    specialities: List<Speciality> = DataFactory.getSpeciality(),
+    specialities: List<SpecialityModel> = DataFactory.getSpeciality(),
     doctors: List<DoctorModel> = DataFactory.getDoctors()
 ) {
 
@@ -60,8 +62,8 @@ fun SearchSection() {
 }
 
 @Composable
-fun CategorySection(categories: List<String>, specialities: List<Speciality>) {
-    SectionTitle(text = "Categories")
+fun CategorySection(categories: List<String>, specialities: List<SpecialityModel>) {
+    EmphasizedText(text = "Categories")
     DashboardCategoryTabs(categories = categories, "Adults")
     SpecialityList(specialityModels = specialities)
 
@@ -105,7 +107,7 @@ fun DashboardCategoryTabIndicator(
 
 @Composable
 fun DoctorsSection(doctors: List<DoctorModel>) {
-    SectionTitle(text = "Doctors")
+    EmphasizedText(text = "Doctors")
     DoctorsList(doctors = doctors)
 }
 

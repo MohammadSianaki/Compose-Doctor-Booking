@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     @Preview
     fun DoctorBookingApp() {
         AppTheme {
-            DashboardContent()
+            DoctorInfo()
         }
     }
 

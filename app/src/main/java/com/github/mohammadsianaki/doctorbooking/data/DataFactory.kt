@@ -1,15 +1,15 @@
 package com.github.mohammadsianaki.doctorbooking.data
 
 import androidx.compose.ui.graphics.Color
-import com.github.mohammadsianaki.doctorbooking.ui.DoctorModel
-import com.github.mohammadsianaki.doctorbooking.ui.Speciality
+import com.github.mohammadsianaki.doctorbooking.model.DoctorModel
+import com.github.mohammadsianaki.doctorbooking.model.SpecialityModel
 import com.github.mohammadsianaki.doctorbooking.util.Drawables
 
 object DataFactory {
 
-    fun getSpeciality() = mutableListOf<Speciality>().apply {
+    fun getSpeciality() = mutableListOf<SpecialityModel>().apply {
         add(
-            Speciality(
+            SpecialityModel(
                 numberOfDoctors = 10,
                 speciality = "Cough and Cold",
                 backgroundColor = Color(0xffFBB97C),
@@ -17,7 +17,7 @@ object DataFactory {
             )
         )
         add(
-            Speciality(
+            SpecialityModel(
                 numberOfDoctors = 17,
                 speciality = "Heart Specialist",
                 backgroundColor = Color(0xffF69383),
@@ -26,7 +26,7 @@ object DataFactory {
         )
 
         add(
-            Speciality(
+            SpecialityModel(
                 numberOfDoctors = 27,
                 speciality = "Diabetes Care",
                 backgroundColor = Color(0xffEACBCB),

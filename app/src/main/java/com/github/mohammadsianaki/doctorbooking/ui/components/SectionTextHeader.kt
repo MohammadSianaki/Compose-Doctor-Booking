@@ -13,11 +13,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun SectionTitle(text: String, modifier: Modifier = Modifier) {
+fun EmphasizedText(
+    text: String,
+    modifier: Modifier? = null,
+    textStyle: TextStyle? = null
+) {
     ProvideEmphasis(emphasis = EmphasisAmbient.current.high) {
         Text(
-            modifier = Modifier.padding(16.dp).then(modifier),
-            text = text, style = TextStyle(
+            modifier = modifier ?: Modifier.padding(16.dp),
+            text = text, style = textStyle ?: TextStyle(
                 color = Color(0xDD000000).copy(alpha = 0.8f),
                 fontSize = 25.sp,
                 fontWeight = FontWeight.SemiBold
