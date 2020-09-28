@@ -24,9 +24,9 @@ import com.github.mohammadsianaki.doctorbooking.util.Drawables
 
 
 @Composable
-fun DoctorInfo(doctorModel: DoctorModel = DataFactory.getDoctors()[0]) {
+fun DoctorInfoScreen(onBack: () -> Unit, doctorModel: DoctorModel = DataFactory.getDoctors()[0]) {
     Scaffold(
-        topBar = { AppBar(true) },
+        topBar = { AppBar(true, onBack) },
     ) {
         ScrollableColumn {
             ProfileSection(doctorModel)
@@ -227,6 +227,6 @@ fun ActivityCard(
 @Preview
 fun DoctorInfoPreview() {
     MaterialTheme {
-        DoctorInfo()
+        DoctorInfoScreen(onBack = {})
     }
 }

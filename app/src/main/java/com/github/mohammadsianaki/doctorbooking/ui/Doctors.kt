@@ -1,9 +1,9 @@
 package com.github.mohammadsianaki.doctorbooking.ui
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.ContentGravity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.Text
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,21 +21,24 @@ import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import com.github.mohammadsianaki.doctorbooking.data.DataFactory
 import com.github.mohammadsianaki.doctorbooking.model.DoctorModel
+import com.github.mohammadsianaki.doctorbooking.util.Screen
 
 
 @Composable
-fun DoctorsList(doctors: List<DoctorModel>) {
+fun DoctorsList(doctors: List<DoctorModel>, onItemClicked: (Screen) -> Unit) {
     LazyColumnFor(items = doctors, modifier = Modifier.fillMaxWidth().padding(16.dp)) { item ->
-        DoctorCard(item)
+        DoctorCard(item, onItemClicked)
     }
 }
 
 @Composable
-fun DoctorCard(doctor: DoctorModel) {
+fun DoctorCard(doctor: DoctorModel, onItemClicked: (Screen) -> Unit = {}) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().clickable(onClick = {
+            onItemClicked.invoke(Screen.DoctorInfo(doctor))
+        }),
         shape = RoundedCornerShape(20.dp),
-        backgroundColor = Color(0xffFFEEE0)
+        backgroundColor = Color(0xffFFEEE0),
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,

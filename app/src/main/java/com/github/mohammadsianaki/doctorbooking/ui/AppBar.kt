@@ -12,13 +12,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun AppBar(showBackButton: Boolean = false) {
+fun AppBar(showBackButton: Boolean = false, onBack: () -> Unit = {}) {
     TopAppBar(
         modifier = Modifier.padding(0.dp),
         elevation = 0.dp,
         backgroundColor = Color.White,
     ) {
-        IconButton(onClick = {}) {
+        IconButton(onClick = onBack) {
             Icon(asset = Icons.Default.ArrowBack)
         }
     }

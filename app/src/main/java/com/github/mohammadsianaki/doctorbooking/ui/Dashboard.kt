@@ -16,16 +16,16 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.Preview
 import com.github.mohammadsianaki.doctorbooking.data.DataFactory
 import com.github.mohammadsianaki.doctorbooking.model.DoctorModel
 import com.github.mohammadsianaki.doctorbooking.model.SpecialityModel
 import com.github.mohammadsianaki.doctorbooking.ui.components.EmphasizedText
+import com.github.mohammadsianaki.doctorbooking.util.Screen
 
 
 @Composable
-@Preview
-fun DashboardContent(
+fun HomeScreen(
+    navigateTo: (Screen) -> Unit,
     categories: List<String> = listOf("Adults", "Childrens", "Womens", "Mens"),
     specialities: List<SpecialityModel> = DataFactory.getSpeciality(),
     doctors: List<DoctorModel> = DataFactory.getDoctors()
@@ -41,7 +41,7 @@ fun DashboardContent(
         ) {
             SearchSection()
             CategorySection(categories, specialities)
-            DoctorsSection(doctors)
+            DoctorsSection(doctors, navigateTo)
         }
     }
 }
@@ -106,8 +106,8 @@ fun DashboardCategoryTabIndicator(
 }
 
 @Composable
-fun DoctorsSection(doctors: List<DoctorModel>) {
+fun DoctorsSection(doctors: List<DoctorModel>, navigateTo: (Screen) -> Unit) {
     EmphasizedText(text = "Doctors")
-    DoctorsList(doctors = doctors)
+    DoctorsList(doctors = doctors, navigateTo)
 }
 
