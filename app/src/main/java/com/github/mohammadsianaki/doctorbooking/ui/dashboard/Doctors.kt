@@ -1,5 +1,7 @@
 package com.github.mohammadsianaki.doctorbooking.ui.dashboard
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.ContentGravity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.Text
@@ -12,6 +14,7 @@ import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -36,17 +39,19 @@ fun DoctorCard(doctor: DoctorModel, onItemClicked: (Screen) -> Unit = {}) {
         }),
         shape = RoundedCornerShape(20.dp),
         backgroundColor = Color(0xffFFEEE0),
+        elevation = 0.dp
     ) {
         Row(
+            modifier = Modifier.padding(vertical = 8.dp),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalGravity = ContentGravity.CenterVertically
         ) {
             Image(
                 asset = imageResource(id = doctor.profile),
-                modifier = Modifier.preferredSize(56.dp).padding(horizontal = 8.dp)
+                modifier = Modifier.preferredSize(56.dp)
             )
             Column(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                modifier = Modifier.padding(start = 0.dp, end = 16.dp, top = 8.dp, bottom = 8.dp),
             ) {
                 Text(
                     text = doctor.name, style = TextStyle(
@@ -60,9 +65,14 @@ fun DoctorCard(doctor: DoctorModel, onItemClicked: (Screen) -> Unit = {}) {
                     )
                 )
             }
+            val context = ContextAmbient.current
             Button(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                onClick = {},
+                onClick = {
+                    context.startActivity(
+                        Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", doctor.telephone, null))
+                    )
+                },
                 backgroundColor = Color(0xffFBB97C)
             ) {
                 Text(
