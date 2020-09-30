@@ -1,4 +1,4 @@
-package com.github.mohammadsianaki.doctorbooking.ui
+package com.github.mohammadsianaki.doctorbooking.ui.detail
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import com.github.mohammadsianaki.doctorbooking.data.DataFactory
 import com.github.mohammadsianaki.doctorbooking.model.DoctorModel
+import com.github.mohammadsianaki.doctorbooking.ui.components.AppBar
 import com.github.mohammadsianaki.doctorbooking.ui.components.EmphasizedText
 import com.github.mohammadsianaki.doctorbooking.util.Drawables
 

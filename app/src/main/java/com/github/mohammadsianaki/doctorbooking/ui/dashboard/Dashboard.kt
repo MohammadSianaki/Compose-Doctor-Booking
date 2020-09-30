@@ -1,4 +1,4 @@
-package com.github.mohammadsianaki.doctorbooking.ui
+package com.github.mohammadsianaki.doctorbooking.ui.dashboard
 
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.Text
@@ -14,12 +14,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.github.mohammadsianaki.doctorbooking.data.DataFactory
 import com.github.mohammadsianaki.doctorbooking.model.DoctorModel
 import com.github.mohammadsianaki.doctorbooking.model.SpecialityModel
+import com.github.mohammadsianaki.doctorbooking.ui.components.AppBar
 import com.github.mohammadsianaki.doctorbooking.ui.components.EmphasizedText
+import com.github.mohammadsianaki.doctorbooking.ui.components.Search
 import com.github.mohammadsianaki.doctorbooking.util.Screen
 
 
@@ -58,7 +61,7 @@ fun SearchSection() {
             )
         )
     }
-    SearchBox(Modifier.padding(16.dp))
+    Search(query = TextFieldValue(""))
 }
 
 @Composable

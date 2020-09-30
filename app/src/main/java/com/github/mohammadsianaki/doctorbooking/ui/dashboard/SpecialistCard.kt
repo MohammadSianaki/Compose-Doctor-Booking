@@ -1,4 +1,4 @@
-package com.github.mohammadsianaki.doctorbooking.ui
+package com.github.mohammadsianaki.doctorbooking.ui.dashboard
 
 import androidx.compose.foundation.Box
 import androidx.compose.foundation.ContentGravity

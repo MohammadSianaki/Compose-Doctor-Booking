@@ -1,4 +1,4 @@
-package com.github.mohammadsianaki.doctorbooking.ui
+package com.github.mohammadsianaki.doctorbooking.ui.components
 
 import androidx.compose.foundation.Icon
 import androidx.compose.foundation.layout.padding

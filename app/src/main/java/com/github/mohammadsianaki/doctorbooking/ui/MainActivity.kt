@@ -6,6 +6,8 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.setContent
 import androidx.lifecycle.ViewModelProvider
+import com.github.mohammadsianaki.doctorbooking.ui.dashboard.HomeScreen
+import com.github.mohammadsianaki.doctorbooking.ui.detail.DoctorInfoScreen
 import com.github.mohammadsianaki.doctorbooking.ui.theme.AppTheme
 import com.github.mohammadsianaki.doctorbooking.util.NavigationViewModel
 import com.github.mohammadsianaki.doctorbooking.util.Screen
