@@ -72,7 +72,7 @@ fun ProfileSection(doctorModel: DoctorModel) {
                         shape = RoundedCornerShape(10.dp)
                     )
                 ) {
-                    Icon(asset = imageResource(id = Drawables.email))
+                    Icon(asset = imageResource(id = Drawables.email), tint = Color(0xfffbb97c))
                 }
                 IconButton(
                     onClick = {},
@@ -82,7 +82,7 @@ fun ProfileSection(doctorModel: DoctorModel) {
                         shape = RoundedCornerShape(10.dp)
                     )
                 ) {
-                    Icon(asset = imageResource(id = Drawables.call))
+                    Icon(asset = imageResource(id = Drawables.call),tint = Color(0xfffc747d))
                 }
                 IconButton(
                     onClick = {},
@@ -92,7 +92,7 @@ fun ProfileSection(doctorModel: DoctorModel) {
                         shape = RoundedCornerShape(10.dp)
                     )
                 ) {
-                    Icon(asset = imageResource(id = Drawables.video_call))
+                    Icon(asset = imageResource(id = Drawables.video_call),tint = Color(0xffa7aab9))
                 }
             }
         }
