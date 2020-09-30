@@ -14,11 +14,13 @@ import com.github.mohammadsianaki.doctorbooking.util.Screen
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navigationViewModel: NavigationViewModel
+    private lateinit var dashboardViewModel: DashboardViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         navigationViewModel = ViewModelProvider(this)[NavigationViewModel::class.java]
+        dashboardViewModel = ViewModelProvider(this)[DashboardViewModel::class.java]
         setContent {
-            DoctorBookingApp(navigationViewModel)
+            DoctorBookingApp(navigationViewModel, dashboardViewModel)
         }
     }
 
@@ -29,7 +31,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     @Composable
-    fun DoctorBookingApp(navigationViewModel: NavigationViewModel) {
+    fun DoctorBookingApp(
+        navigationViewModel: NavigationViewModel,
+        dashboardViewModel: DashboardViewModel
+    ) {
         AppTheme {
             AppContent(navigationViewModel)
         }
@@ -39,8 +44,11 @@ class MainActivity : AppCompatActivity() {
     fun AppContent(navigationViewModel: NavigationViewModel) {
         Crossfade(current = navigationViewModel.currentScreen) { screen ->
             when (screen) {
-                is Screen.Home -> HomeScreen(navigationViewModel::navigateTo)
-                is Screen.DoctorInfo -> DoctorInfoScreen(navigationViewModel::onBackPressed)
+                is Screen.Home -> HomeScreen(navigationViewModel::navigateTo, dashboardViewModel)
+                is Screen.DoctorInfo -> DoctorInfoScreen(
+                    navigationViewModel::onBackPressed,
+                    screen.doctorModel
+                )
             }
         }
     }

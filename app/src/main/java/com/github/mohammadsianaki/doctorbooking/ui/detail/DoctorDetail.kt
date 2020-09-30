@@ -4,7 +4,6 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,8 +15,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.Preview
-import com.github.mohammadsianaki.doctorbooking.data.DataFactory
 import com.github.mohammadsianaki.doctorbooking.model.DoctorModel
 import com.github.mohammadsianaki.doctorbooking.ui.components.AppBar
 import com.github.mohammadsianaki.doctorbooking.ui.components.EmphasizedText
@@ -25,13 +22,13 @@ import com.github.mohammadsianaki.doctorbooking.util.Drawables
 
 
 @Composable
-fun DoctorInfoScreen(onBack: () -> Unit, doctorModel: DoctorModel = DataFactory.getDoctors()[0]) {
+fun DoctorInfoScreen(onBack: () -> Unit, doctorModel: DoctorModel) {
     Scaffold(
         topBar = { AppBar(true, onBack) },
     ) {
         ScrollableColumn {
             ProfileSection(doctorModel)
-            AboutSection()
+            AboutSection(doctorModel)
             ActivitySection()
         }
     }
@@ -46,7 +43,7 @@ fun ProfileSection(doctorModel: DoctorModel) {
     ) {
         Image(
             modifier = Modifier.preferredHeight(220.dp),
-            asset = imageResource(id = Drawables.doctor_pic2),
+            asset = imageResource(id = doctorModel.secondaryProfile),
             contentScale = ContentScale.Fit,
         )
         Box {
@@ -103,14 +100,14 @@ fun ProfileSection(doctorModel: DoctorModel) {
 }
 
 @Composable
-fun AboutSection() {
+fun AboutSection(doctorModel: DoctorModel) {
     Text(
         text = "About",
         style = TextStyle(fontSize = 22.sp),
         modifier = Modifier.padding(start = 32.dp, top = 16.dp)
     )
     Text(
-        text = "Dr. Stefeni Albert is a cardiologist in Nashville & affiliated with multiple hospitals in the  area.He received his medical degree from Duke University School of Medicine and has been in practice for more than 20 years. ",
+        text = doctorModel.about,
         style = TextStyle(color = Color(0xFF9E9E9E), fontSize = 16.sp),
         modifier = Modifier.padding(horizontal = 32.dp, vertical = 16.dp),
     )
@@ -129,7 +126,7 @@ fun AboutSection() {
                         )
                     )
                     Text(
-                        text = "House # 2, Road # 5, Green Road Dhanmondi, Dhaka, Bangladesh",
+                        text = doctorModel.address,
                         style = TextStyle(color = Color.Gray)
                     )
                 }
@@ -147,7 +144,7 @@ fun AboutSection() {
                         )
                     )
                     Text(
-                        text = "Monday - Friday Open till 7 Pm",
+                        text = doctorModel.daily,
                         style = TextStyle(color = Color.Gray)
                     )
                 }
@@ -221,13 +218,5 @@ fun ActivityCard(
                 modifier = Modifier.padding(end = 16.dp, start = 8.dp, top = 16.dp, bottom = 16.dp)
             )
         }
-    }
-}
-
-@Composable
-@Preview
-fun DoctorInfoPreview() {
-    MaterialTheme {
-        DoctorInfoScreen(onBack = {})
     }
 }

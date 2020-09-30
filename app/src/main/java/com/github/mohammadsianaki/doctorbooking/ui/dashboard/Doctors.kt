@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,8 +17,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.Preview
-import com.github.mohammadsianaki.doctorbooking.data.DataFactory
 import com.github.mohammadsianaki.doctorbooking.model.DoctorModel
 import com.github.mohammadsianaki.doctorbooking.util.Screen
 
@@ -77,14 +74,5 @@ fun DoctorCard(doctor: DoctorModel, onItemClicked: (Screen) -> Unit = {}) {
                 )
             }
         }
-    }
-}
-
-
-@Composable
-@Preview
-fun DoctorCardPreview(doctor: DoctorModel = DataFactory.getDoctors()[0]) {
-    MaterialTheme {
-        DoctorCard(doctor = doctor)
     }
 }

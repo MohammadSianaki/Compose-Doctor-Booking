@@ -9,6 +9,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.TabConstants.defaultTabIndicatorOffset
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,23 +19,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.github.mohammadsianaki.doctorbooking.data.DataFactory
 import com.github.mohammadsianaki.doctorbooking.model.DoctorModel
-import com.github.mohammadsianaki.doctorbooking.model.SpecialityModel
+import com.github.mohammadsianaki.doctorbooking.ui.Category
+import com.github.mohammadsianaki.doctorbooking.ui.DashboardViewModel
 import com.github.mohammadsianaki.doctorbooking.ui.components.AppBar
 import com.github.mohammadsianaki.doctorbooking.ui.components.EmphasizedText
 import com.github.mohammadsianaki.doctorbooking.ui.components.Search
 import com.github.mohammadsianaki.doctorbooking.util.Screen
 
-
 @Composable
 fun HomeScreen(
     navigateTo: (Screen) -> Unit,
-    categories: List<String> = listOf("Adults", "Childrens", "Womens", "Mens"),
-    specialities: List<SpecialityModel> = DataFactory.getSpeciality(),
-    doctors: List<DoctorModel> = DataFactory.getDoctors()
+    dashboardViewModel: DashboardViewModel
 ) {
-
+    val viewState by dashboardViewModel.viwState.collectAsState()
     Scaffold(
         topBar = { AppBar() },
     ) { _ ->
@@ -43,8 +42,12 @@ fun HomeScreen(
             verticalArrangement = Arrangement.Top
         ) {
             SearchSection()
-            CategorySection(categories, specialities)
-            DoctorsSection(doctors, navigateTo)
+            CategorySection(
+                viewState.categories,
+                viewState.selectedCategory,
+                dashboardViewModel::onCategorySelected
+            )
+            DoctorsSection(viewState.doctors, navigateTo)
         }
     }
 }
@@ -65,17 +68,23 @@ fun SearchSection() {
 }
 
 @Composable
-fun CategorySection(categories: List<String>, specialities: List<SpecialityModel>) {
+fun CategorySection(
+    categories: List<Category>,
+    selectedCategory: Int,
+    onCategorySelected: (index:Int) -> Unit
+) {
     EmphasizedText(text = "Categories")
-    DashboardCategoryTabs(categories = categories, "Adults")
-    SpecialityList(specialityModels = specialities)
-
+    DashboardCategoryTabs(categories = categories, selectedCategory, onCategorySelected)
+    SpecialityList(specialityModels = categories[selectedCategory].specialists)
 }
 
 
 @Composable
-fun DashboardCategoryTabs(categories: List<String>, selectedCategory: String) {
-    val selectedIndex = categories.indexOfFirst { it == selectedCategory }
+fun DashboardCategoryTabs(
+    categories: List<Category>,
+    selectedIndex: Int,
+    onCategorySelected: (index: Int) -> Unit
+) {
     val indicator = @Composable { tabPositions: List<TabPosition> ->
         DashboardCategoryTabIndicator(
             Modifier.defaultTabIndicatorOffset(tabPositions[selectedIndex])
@@ -88,8 +97,8 @@ fun DashboardCategoryTabs(categories: List<String>, selectedCategory: String) {
         backgroundColor = Color.White
     ) {
         categories.forEachIndexed { index, category ->
-            Tab(selected = (index == 0), onClick = {}, text = {
-                Text(text = category)
+            Tab(selected = (index == selectedIndex), onClick = { onCategorySelected(index) }, text = {
+                Text(text = category.name)
             })
         }
     }
