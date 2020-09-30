@@ -1,19 +1,19 @@
 package com.github.mohammadsianaki.doctorbooking.ui.dashboard
 
 import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.ScrollableRow
 import androidx.compose.foundation.Text
-import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.RowScope.gravity
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.TabConstants.defaultTabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
@@ -25,6 +25,7 @@ import com.github.mohammadsianaki.doctorbooking.ui.DashboardViewModel
 import com.github.mohammadsianaki.doctorbooking.ui.components.AppBar
 import com.github.mohammadsianaki.doctorbooking.ui.components.EmphasizedText
 import com.github.mohammadsianaki.doctorbooking.ui.components.Search
+import com.github.mohammadsianaki.doctorbooking.ui.theme.LightOrange
 import com.github.mohammadsianaki.doctorbooking.util.Screen
 
 @Composable
@@ -71,7 +72,7 @@ fun SearchSection() {
 fun CategorySection(
     categories: List<Category>,
     selectedCategory: Int,
-    onCategorySelected: (index:Int) -> Unit
+    onCategorySelected: (index: Int) -> Unit
 ) {
     EmphasizedText(text = "Categories")
     DashboardCategoryTabs(categories = categories, selectedCategory, onCategorySelected)
@@ -85,36 +86,48 @@ fun DashboardCategoryTabs(
     selectedIndex: Int,
     onCategorySelected: (index: Int) -> Unit
 ) {
-    val indicator = @Composable { tabPositions: List<TabPosition> ->
-        DashboardCategoryTabIndicator(
-            Modifier.defaultTabIndicatorOffset(tabPositions[selectedIndex])
-        )
-    }
 
-    TabRow(
-        selectedTabIndex = 0,
-        indicator = indicator,
-        backgroundColor = Color.White
-    ) {
+    ScrollableRow(modifier = Modifier.preferredHeightIn(minHeight = 56.dp)) {
+        Spacer(Modifier.preferredWidth(8.dp))
         categories.forEachIndexed { index, category ->
-            Tab(selected = (index == selectedIndex), onClick = { onCategorySelected(index) }, text = {
-                Text(text = category.name)
-            })
+            FilterChip(
+                filter = category,
+                selected = selectedIndex == index,
+                modifier = Modifier.gravity(Alignment.CenterVertically),
+                onCategorySelected = onCategorySelected,
+                index = index
+            )
+            Spacer(Modifier.preferredWidth(8.dp))
         }
     }
 }
 
 @Composable
-fun DashboardCategoryTabIndicator(
+fun FilterChip(
+    filter: Category,
     modifier: Modifier = Modifier,
-    color: Color = MaterialTheme.colors.primary
+    selected: Boolean,
+    onCategorySelected: (index: Int) -> Unit,
+    index: Int
 ) {
-    Spacer(
-        modifier = modifier.preferredWidth(112.dp)
-            .preferredHeight(4.dp)
-            .gravity(Alignment.CenterVertically)
-            .background(color, RoundedCornerShape(topLeftPercent = 100, topRightPercent = 100))
-    )
+    Surface(
+        modifier = modifier
+            .preferredHeight(28.dp)
+            .clickable(onClick = { onCategorySelected(index) }, indication = null),
+        color = if (selected) LightOrange else Color.Transparent,
+        contentColor = if (selected) Color.White else Color.Black,
+        shape = if (selected) RoundedCornerShape(15.dp) else RectangleShape
+    ) {
+        Text(
+            text = filter.name,
+            style = MaterialTheme.typography.caption,
+            maxLines = 1,
+            modifier = Modifier.padding(
+                horizontal = 20.dp,
+                vertical = 6.dp
+            )
+        )
+    }
 }
 
 @Composable
