@@ -18,8 +18,10 @@ fun AppBar(showBackButton: Boolean = false, onBack: () -> Unit = {}) {
         elevation = 0.dp,
         backgroundColor = Color.White,
     ) {
-        IconButton(onClick = onBack) {
-            Icon(asset = Icons.Default.ArrowBack)
+        IconButton(onClick = onBack, enabled = showBackButton) {
+            if (showBackButton) {
+                Icon(asset = Icons.Default.ArrowBack)
+            }
         }
     }
 }
